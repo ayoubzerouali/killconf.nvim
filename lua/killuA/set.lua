@@ -30,3 +30,18 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'vue',
+    callback = function()
+        -- Vue single-file components use HTML-style comments
+        vim.bo.commentstring = '<!-- %s -->'
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'tsx',
+    callback = function()
+        -- Vue single-file components use HTML-style comments
+        vim.bo.commentstring = '{/** %s **/}'
+    end
+})

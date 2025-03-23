@@ -1,14 +1,17 @@
 local lsp_zero = require('lsp-zero')
-local lspconfig = require('lspconfig')
-lspconfig.emmet_language_server.setup({})
 require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'tsserver', 'eslint', 'rust_analyzer' },
+    ensure_installed = { 'eslint', 'volar', 'jsonls', 'html', 'intelephense', 'tailwindcss' },
     handlers = {
         function(server_name)
-            lspconfig[server_name].setup({})
+            require('lspconfig')[server_name].setup({})
+        end,
+        intelephense = function()
+            require('lspconfig').intelephense.setup({
+                filetypes = { 'php', 'blade', 'blade.php' }
+            })
         end,
     }
 })
