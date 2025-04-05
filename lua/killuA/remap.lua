@@ -6,7 +6,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-s>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -57,13 +57,13 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 --search in whats highlighted what you want
 vim.keymap.set("v", "<leader>ss", [[:s/\<\>//gI<Left><Left><Left><Left><Left><Left>]])
 --search whole file whats under the  cursor
-vim.keymap.set("n", "<leader>s", [[:%s\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 --search from now to end of the file file whats under the  cursor
 vim.keymap.set("n", "<leader>ste", [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- search and replace occurances in this line
-vim.keymap.set("n", "<leader>se", [[:.s/\<\>//g<Left><Left><Left><Left><Left><Left>]])
+vim.keymap.set("n", "<leader>se", [[:.s/\<\>//g<Left><Left><Left><Left><Left>]])
 -- search and replace occurances in the whole file
-vim.keymap.set("n", "<leader>sr", [[:%s/@\(\S\+\)/\1/g<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>sr", [[:%s/@\(\S\+\)/@\1/g<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 

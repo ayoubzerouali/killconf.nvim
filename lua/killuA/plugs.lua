@@ -1,0 +1,12 @@
+-- require('ai_autocomplete').setup({
+--   url = "http://localhost:8081/ai-suggest",
+--   debounce_ms = 200
+-- })
+--
+--
+--
+--
+--
+
+-- vim.opt.rtp:append("~/.config/nvim/pack/ai_plugin/start/nvim-ai-autocomplete")
+-- require("ai_autocomplete")

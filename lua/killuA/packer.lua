@@ -32,6 +32,9 @@ return require('packer').startup(function(use)
     -- use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
     -- use {'EmranMR/tree-sitter-blade'}
     use({
+        "Exafunction/codeium.vim"
+    })
+    use({
         "stevearc/conform.nvim",
         config = function()
             require("conform").setup()
@@ -51,4 +54,5 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     }
+    -- use "~/config/nvim/pack/ai_plugin/start/nvim-ai-autocomplete"
 end)

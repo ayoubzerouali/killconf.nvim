@@ -1,5 +1,12 @@
--- vim.opt.guicursor = ""
 --
+-- set runtime path to nvim
+-- vim.o.runtimepath = vim.o.runtimepath .. ',/home/killu/.config/nvim'
+
+
+--log the o.runtimepath
+-- print(vim.o.runtimepath)
+
+-- vim.opt.ttimeoutlen = 10
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -22,26 +29,32 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
+
+vim.opt.lazyredraw = true --disable redraw during macros
+
+
 vim.opt.scrolloff = 8
+-- vim.opt.sidescrolloff = 12
+
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "90"
+-- vim.opt.textwidth = 80
 vim.api.nvim_set_option("clipboard", "unnamed")
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'vue',
-    callback = function()
-        -- Vue single-file components use HTML-style comments
-        vim.bo.commentstring = '<!-- %s -->'
-    end
-})
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'tsx',
-    callback = function()
-        -- Vue single-file components use HTML-style comments
-        vim.bo.commentstring = '{/** %s **/}'
-    end
-})
+
+
+-- vim.o.updatetime = 300
+
+
+vim.keymap.set("n", "<leader>er", function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+end, { desc = "Show diagnostics popup" })
+
+
+
+
+

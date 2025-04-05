@@ -1,0 +1,55 @@
+**regmap.txt**
+==========================
+ Neovim & Vim Regex Guide
+==========================
+
+Basic Matches:
+--------------
+.        → Matches any single character except a newline
+^        → Matches the start of a line
+$        → Matches the end of a line
+\        → Escapes a special character (e.g., \. matches a literal dot)
+[...]    → Matches any single character inside the brackets (e.g., [abc] matches 'a', 'b', or 'c')
+[^...]   → Matches any character NOT inside the brackets
+
+Character Classes:
+------------------
+\d       → Matches a digit (0-9)
+\D       → Matches any non-digit
+\w       → Matches a word character (letters, digits, underscore)
+\W       → Matches a non-word character
+\s       → Matches whitespace (spaces, tabs)
+\S       → Matches non-whitespace
+
+Quantifiers:
+------------
+*        → Matches 0 or more times (greedy)
+\+       → Matches 1 or more times (greedy)
+\?       → Matches 0 or 1 time (optional)
+\{n,m\}  → Matches at least n and at most m times (e.g., \d\{2,4\} matches 2 to 4 digits)
+
+Capturing & Groups:
+-------------------
+\(\w\+\) → Captures one or more word characters
+\(abc\)  → Captures "abc" as a group
+\1, \2   → Refers to captured groups in replacement (e.g., \1 for the first capture)
+
+Lookarounds:
+------------
+\@<=      → Lookbehind (matches if preceded by pattern)
+\@=       → Lookahead (matches if followed by pattern)
+\@!       → Negative lookahead (does NOT match if followed by pattern)
+
+Common Use Cases:
+-----------------
+z\.       → Matches "z." literally
+\(\w\+\)  → Captures a word (e.g., number, string, etc.)
+()        → Matches parentheses
+\(\d\+\)  → Captures one or more digits
+\(\.\w\+\) → Captures a dot followed by a word (e.g., .jpg, .png)
+
+Advanced Substitutions:
+-----------------------
+\=submatch(1)[0]->toupper() . submatch(1)[1:] → Capitalizes the first letter of a capture
+\U\1 → Converts first capture to uppercase (e.g., "hello" → "HELLO")
+\L\1 → Converts first capture to lowercase (e.g., "HELLO" → "hello")
