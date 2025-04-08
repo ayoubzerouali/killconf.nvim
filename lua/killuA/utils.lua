@@ -25,3 +25,11 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.bo.commentstring = '<!-- %s -->'
     end
 })
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     pattern = "*.dart",
+--     callback = function()
+--         local target = os.getenv("FLUTTER_TMUX_PANE") or "%0"
+--         print(target)
+--         vim.fn.system("tmux send-keys -t " .. target .. " r")
+--     end,
+-- })
