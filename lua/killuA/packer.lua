@@ -12,13 +12,13 @@ return require('packer').startup(function(use)
         requires = { 'nvim-lua/plenary.nvim' }
     }
 
-    use {
-        'nvim-flutter/flutter-tools.nvim',
-        requires = {
-            -- 'nvim-lua/plenary.nvim',
-            'stevearc/dressing.nvim', -- optional for vim.ui.select
-        },
-    }
+    -- use {
+    --     'nvim-flutter/flutter-tools.nvim',
+    --     requires = {
+    --         -- 'nvim-lua/plenary.nvim',
+    --         'stevearc/dressing.nvim', -- optional for vim.ui.select
+    --     },
+    -- }
     use({
         "rose-pine/neovim",
         as = "rose-pine",
@@ -28,32 +28,30 @@ return require('packer').startup(function(use)
     })
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use('nvim-treesitter/playground')
+    -- use('nvim-treesitter/playground')
     -- use('theprimeagen/harpoon')
     use('mbbill/undotree')
-    use { 'EmranMR/tree-sitter-blade' }
     -- use('tpope/vim-fugitive')
     -- use {
     --     'tpope/vim-surround'
     -- }
-    -- use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
     -- use {'EmranMR/tree-sitter-blade'}
     use({
         "Exafunction/codeium.vim"
     })
-    use({
-        "stevearc/conform.nvim",
-        config = function()
-            require("conform").setup()
-        end,
-    })
+    -- use({
+    --     "stevearc/conform.nvim",
+    --     config = function()
+    --         require("conform").setup()
+    --     end,
+    -- })
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         requires = {
             --- Uncomment the two plugins below if you want to manage the language servers from neovim
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
+            { 'mason-org/mason.nvim' },
+            { 'mason-org/mason-lspconfig.nvim' },
 
             { 'neovim/nvim-lspconfig' },
             { 'hrsh7th/nvim-cmp' },
@@ -62,4 +60,14 @@ return require('packer').startup(function(use)
         }
     }
     -- use "~/config/nvim/pack/ai_plugin/start/nvim-ai-autocomplete"
+    use({
+        'MeanderingProgrammer/render-markdown.nvim',
+        after = { 'nvim-treesitter' },
+        requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+        -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+        -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+        config = function()
+            require('render-markdown').setup({})
+        end,
+    })
 end)

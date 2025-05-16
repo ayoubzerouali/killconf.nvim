@@ -89,22 +89,6 @@ _G.packer_plugins = {
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/codeium.vim",
     url = "https://github.com/Exafunction/codeium.vim"
   },
-  ["conform.nvim"] = {
-    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fconform\frequire\0" },
-    loaded = true,
-    path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/conform.nvim",
-    url = "https://github.com/stevearc/conform.nvim"
-  },
-  ["dressing.nvim"] = {
-    loaded = true,
-    path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/dressing.nvim",
-    url = "https://github.com/stevearc/dressing.nvim"
-  },
-  ["flutter-tools.nvim"] = {
-    loaded = true,
-    path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
-    url = "https://github.com/nvim-flutter/flutter-tools.nvim"
-  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -113,12 +97,18 @@ _G.packer_plugins = {
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+    url = "https://github.com/mason-org/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
     loaded = true,
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
+    url = "https://github.com/mason-org/mason.nvim"
+  },
+  ["mini.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/ayoub/.local/share/nvim/site/pack/packer/opt/mini.nvim",
+    url = "https://github.com/echasnovski/mini.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -140,15 +130,18 @@ _G.packer_plugins = {
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  playground = {
-    loaded = true,
-    path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["render-markdown.nvim"] = {
+    config = { "\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/ayoub/.local/share/nvim/site/pack/packer/opt/render-markdown.nvim",
+    url = "https://github.com/MeanderingProgrammer/render-markdown.nvim"
   },
   ["rose-pine"] = {
     config = { "\27LJ\2\n9\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\bvim\0" },
@@ -161,11 +154,6 @@ _G.packer_plugins = {
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["tree-sitter-blade"] = {
-    loaded = true,
-    path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/tree-sitter-blade",
-    url = "https://github.com/EmranMR/tree-sitter-blade"
-  },
   undotree = {
     loaded = true,
     path = "/home/ayoub/.local/share/nvim/site/pack/packer/start/undotree",
@@ -174,14 +162,19 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: conform.nvim
-time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fconform\frequire\0", "config", "conform.nvim")
-time([[Config for conform.nvim]], false)
 -- Config for: rose-pine
 time([[Config for rose-pine]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\bvim\0", "config", "rose-pine")
 time([[Config for rose-pine]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-treesitter ]]
+vim.cmd [[ packadd render-markdown.nvim ]]
+
+-- Config for: render-markdown.nvim
+try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0", "config", "render-markdown.nvim")
+
+time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

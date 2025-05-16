@@ -39,7 +39,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 500
 
 vim.opt.colorcolumn = "90"
 -- vim.opt.textwidth = 80
@@ -47,14 +47,8 @@ vim.api.nvim_set_option("clipboard", "unnamed")
 
 
 
--- vim.o.updatetime = 300
 
 
 vim.keymap.set("n", "<leader>er", function()
     vim.diagnostic.open_float(nil, { focusable = false })
 end, { desc = "Show diagnostics popup" })
-
-
-
-
-
