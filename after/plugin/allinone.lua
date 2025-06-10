@@ -1,0 +1,248 @@
+-- -- local lsp_zero = require('lsp-zero')
+--
+-- require('mason').setup({})
+-- require('mason-lspconfig').setup({
+--     ensure_installed = {
+--         'jsonls',
+--         'ts_ls',
+--         'eslint',
+--         'lua_ls',
+--         'html',
+--         'tailwindcss',
+--         'intelephense'
+--     },
+--     handlers = {
+--         -- Default handler for most servers
+--         function(server_name)
+--             require('lspconfig')[server_name].setup({})
+--         end,
+--         -- Optimized TypeScript server configuration
+--         ts_ls = function()
+--             require('lspconfig').ts_ls.setup({
+--                 -- ... your existing config ...
+--
+--                 -- BALANCED MEMORY SETTINGS:
+--                 init_options = {
+--                     maxTsServerMemory = 2048,                         -- Balanced limit for 8GB RAM
+--                     preferences = {
+--                         disableSuggestions = false,                   -- KEEP enabled for autocomplete
+--                         includeCompletionsForModuleExports = true,    -- KEEP for auto-imports
+--                         includeCompletionsForImportStatements = true, -- ENABLE auto-imports
+--                         includeAutomaticOptionalChainCompletions = true,
+--                     },
+--                 },
+--
+--                 -- BALANCED SETTINGS - Keep essential features:
+--                 settings = {
+--                     typescript = {
+--                         -- DISABLE heavy inlay hints but keep some useful ones:
+--                         inlayHints = {
+--                             includeInlayParameterNameHints = 'none',          -- Disable parameter hints
+--                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--                             includeInlayFunctionParameterTypeHints = false,   -- Disable to save memory
+--                             includeInlayVariableTypeHints = false,            -- Disable to save memory
+--                             includeInlayPropertyDeclarationTypeHints = false, -- Disable to save memory
+--                             includeInlayFunctionLikeReturnTypeHints = false,  -- Disable to save memory
+--                             includeInlayEnumMemberValueHints = true,          -- KEEP this one - it's useful and lightweight
+--                         },
+--                         preferences = {
+--                             disableSuggestions = false,                   -- KEEP enabled for autocomplete
+--                             includeCompletionsWithSnippetText = true,     -- KEEP for better completions
+--                             includeCompletionsForImportStatements = true, -- ESSENTIAL for auto-imports
+--                         },
+--                         suggest = {
+--                             includeCompletionsForModuleExports = true, -- ESSENTIAL for auto-imports
+--                             includeAutomaticOptionalChainCompletions = true,
+--                             includeCompletionsWithInsertText = true,
+--                             autoImports = true, -- ESSENTIAL for auto-imports
+--                         },
+--                     },
+--                     javascript = {
+--                         inlayHints = {
+--                             includeInlayParameterNameHints = 'none',
+--                             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--                             includeInlayFunctionParameterTypeHints = false,
+--                             includeInlayVariableTypeHints = false,
+--                             includeInlayPropertyDeclarationTypeHints = false,
+--                             includeInlayFunctionLikeReturnTypeHints = false,
+--                             includeInlayEnumMemberValueHints = true, -- Keep this lightweight feature
+--                         },
+--                         suggest = {
+--                             autoImports = true, -- ESSENTIAL for auto-imports
+--                         },
+--                     },
+--                 },
+--
+--                 -- MODERATE debounce time:
+--                 flags = {
+--                     debounce_text_changes = 750, -- Balanced - not too slow, not too fast
+--                 },
+--
+--                 -- BALANCED on_attach:
+--                 on_attach = function(client, bufnr)
+--                     client.server_capabilities.documentFormattingProvider = false
+--                     client.server_capabilities.documentRangeFormattingProvider = false
+--                     -- Keep semantic tokens for better highlighting (but disable if still too slow)
+--                     -- client.server_capabilities.semanticTokensProvider = nil
+--                     client.server_capabilities.documentHighlightProvider = false -- Disable this heavy feature
+--                 end,
+--             })
+--         end,
+--         -- Optimized ESLint configuration
+--         eslint = function()
+--             require('lspconfig').eslint.setup({
+--                 -- ... your existing config ...
+--
+--                 settings = {
+--                     -- BALANCED settings:
+--                     format = false, -- Keep disabled to save memory
+--                     quiet = false,  -- KEEP enabled to see warnings (they're useful)
+--                     run = "onSave", -- Run on save instead of onType for better performance
+--
+--                     -- KEEP useful code actions:
+--                     codeAction = {
+--                         disableRuleComment = {
+--                             enable = true,
+--                             location = "separateLine"
+--                         },
+--                         showDocumentation = {
+--                             enable = true -- KEEP enabled - it's useful and not memory-heavy
+--                         }
+--                     },
+--                     codeActionOnSave = {
+--                         enable = true,    -- ENABLE for auto-fixing on save
+--                         mode = "problems" -- Only fix actual problems, not style issues
+--                     },
+--                     -- ... rest of your settings unchanged ...
+--                 },
+--
+--                 -- MODERATE debounce time:
+--                 flags = {
+--                     debounce_text_changes = 1500, -- Balanced - not too slow for feedback
+--                 },
+--             })
+--         end,
+--         -- Tailwind CSS configuration
+--         tailwindcss = function()
+--             require('lspconfig').tailwindcss.setup({
+--                 -- ... your existing config ...
+--
+--                 settings = {
+--                     tailwindCSS = {
+--                         classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+--                         lint = {
+--                             -- DISABLE heavy linting but keep critical errors:
+--                             cssConflict = "ignore",             -- Disable - not critical
+--                             invalidApply = "error",             -- KEEP - this is important
+--                             invalidConfigPath = "error",        -- KEEP - this is important
+--                             invalidScreen = "ignore",           -- Disable - not critical
+--                             invalidTailwindDirective = "error", -- KEEP - this is important
+--                             invalidVariant = "ignore",          -- Disable - not critical
+--                             recommendedVariantOrder = "ignore"  -- Disable - just style preference
+--                         },
+--                         validate = true,                        -- KEEP enabled for completions and basic validation
+--                         completions = {
+--                             includeConfig = true,               -- KEEP for custom config completions
+--                             includeVariants = true,             -- KEEP for variant completions
+--                         }
+--                     }
+--                 },
+--
+--                 -- MODERATE debounce time:
+--                 flags = {
+--                     debounce_text_changes = 800, -- Balanced for CSS completions
+--                 },
+--             })
+--         end,
+--         -- Lua language server configuration
+--         lua_ls = function()
+--             require('lspconfig').lua_ls.setup({
+--                 settings = {
+--                     Lua = {
+--                         runtime = {
+--                             version = 'LuaJIT'
+--                         },
+--                         diagnostics = {
+--                             globals = { 'vim' },
+--                         },
+--                         workspace = {
+--                             library = {
+--                                 vim.env.VIMRUNTIME,
+--                             }
+--                         }
+--                     }
+--                 },
+--                 flags = {
+--                     debounce_text_changes = 500,
+--                 },
+--             })
+--         end,
+--     }
+-- })
+--
+-- -- Global LSP settings for better performance
+-- local signs = {
+--     { name = "DiagnosticSignError", text = "" },
+--     { name = "DiagnosticSignWarn",  text = "" },
+--     { name = "DiagnosticSignHint",  text = "" },
+--     { name = "DiagnosticSignInfo",  text = "" },
+-- }
+--
+-- for _, sign in ipairs(signs) do
+--     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+-- end
+--
+-- -- Configure diagnostics for better performance
+-- vim.diagnostic.config({
+--     virtual_text = {
+--         prefix = "●",
+--         severity = vim.diagnostic.severity.ERROR, -- Only show errors in virtual text
+--     },
+--     signs = {
+--         active = signs,
+--     },
+--     update_in_insert = false, -- Don't update diagnostics in insert mode
+--     underline = true,
+--     severity_sort = true,
+--     float = {
+--         focusable = false,
+--         style = "minimal",
+--         border = "rounded",
+--         source = "if_many", -- Show source only when there are multiple
+--         header = "",
+--         prefix = "",
+--         max_width = 80,  -- Limit popup width
+--         max_height = 15, -- Limit popup height
+--     },
+-- })
+--
+-- -- Reduce updatetime for better performance
+-- vim.opt.updatetime = 300
+--
+-- -- Set completeopt for better completion experience
+-- vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+--
+-- -- LSP keymaps (add these to your init.lua or separate keymap file)
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+--     callback = function(ev)
+--         local opts = { buffer = ev.buf }
+--         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+--         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+--         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+--         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+--         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+--         vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+--         vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+--         vim.keymap.set('n', '<space>wl', function()
+--             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--         end, opts)
+--         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+--         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+--         vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+--         vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+--         vim.keymap.set('n', '<space>f', function()
+--             vim.lsp.buf.format { async = true }
+--         end, opts)
+--     end,
+-- })
